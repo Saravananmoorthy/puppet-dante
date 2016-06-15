@@ -1,10 +1,14 @@
-class dante{
+class dante( $version = '1.4.1' ){
 
 
-	class{'dante::install': } ->
-	class{'dante::configure': } ~>
+
+	class{'dante::install': 
+		version => $version
+	} -> 
+ 	class{'dante::configure': } ~> 
 	class{'dante::service': } ->
-	Class['dante']
-
+	Class['dante'] 
 
 }
+
+

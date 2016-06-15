@@ -2,11 +2,11 @@ class dante::configure{
 
 
 	file { "/etc/sockd.conf":
-                source => "puppet:///modules/danted/dantedconf",
+                source => "puppet:///modules/dante/dantedconf",
         }
 
         file { "/etc/init.d/sockd":
-                source => "puppet:///modules/danted/dantedinit",
+                source => "puppet:///modules/dante/dantedinit",
                 mode => "0777"
 	}
 }
