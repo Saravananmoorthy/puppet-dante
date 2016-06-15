@@ -2,11 +2,40 @@ class dante::install( $version ) {
 
 
 	notify {"Running with ${version} defined":}
-	
-	package { 'build-essential'  :
-		ensure => installed ,
-		before => Exec['install-dante-from-archive']
-	} 
+
+
+
+	# Decide which dev packages to install
+
+	case $operatingsystem {
+
+	  'RedHat', 'CentOS': { 
+		
+               dante::install::buildtools { 'packages' :
+                        list_of_packages => [ 'build-essential' ],
+
+                }
+ 
+	   }
+
+	   /^(Debian|Ubuntu)$/:{ 
+
+		dante::install::buildtools { 'packages' : 
+			list_of_packages => [ 'build-essential' ]
+		}		
+	  }
+
+	   default:{ 
+
+
+                dante::install::buildtools { 'packages' :
+                        list_of_packages => [ 'gcc' , 'gcc-c++' , 'make' , 'openssl-devel'  ]
+                }
+ 
+
+	   }
+	}
+
 	
 
 	exec{ 'download-dante' : 
@@ -21,5 +50,13 @@ class dante::install( $version ) {
 		creates => '/usr/local/sbin/sockd',		 
 		
 	} 
+}
+
+define dante::install::buildtools( $list_of_packages ) {
+	notify { "Installing ${list_of_packages} ---": }
+	package { $list_of_packages  :
+                ensure => installed ,
+                before => Exec['install-dante-from-archive']
+        }
 
 }
