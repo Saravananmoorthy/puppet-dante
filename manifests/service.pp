@@ -1,4 +1,4 @@
-class danted::service{
+class dante::service{
 
       service { 'sockd':
             ensure => 'running',

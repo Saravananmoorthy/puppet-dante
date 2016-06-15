@@ -1,4 +1,4 @@
-class danted::configure{
+class dante::configure{
 
 
 	file { "/etc/sockd.conf":

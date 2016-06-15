@@ -1,10 +1,10 @@
-class danted{
+class dante{
 
 
-	class{'danted::install': } ->
-	class{'danted::configure': } ~>
-	class{'danted::service': } ->
-	Class['danted']
+	class{'dante::install': } ->
+	class{'dante::configure': } ~>
+	class{'dante::service': } ->
+	Class['dante']
 
 
 }
