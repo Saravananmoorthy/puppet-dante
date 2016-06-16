@@ -4,8 +4,8 @@ logoutput: /var/log/sockd.log
 #debug: 2
 
 # server address specification
-internal: 0.0.0.0 port = 8001
-external: eth0
+internal: <%= @internal_interface %> port = <%= @socks_port %>
+external: <%= @external_interface %>
 
 # server identities (not needed on solaris)
 user.privileged: root
@@ -33,7 +33,7 @@ socksmethod: username
 
 # allow connections from local network (192.0.2.0/24)
 client pass {
-        from: 0.0.0.0/0 to: 0.0.0.0/0
+        from: <%= @client_pass_start_range %> to: <%= @client_pass_end_range %>
 #       proxyprotocol: socks_v5
         log: error # connect disconnect
 }
@@ -53,7 +53,7 @@ client pass {
 
 # generic pass statement - bind/outgoing traffic
 socks pass {
-        from: 0.0.0.0/0 to: 0.0.0.0/0
+        from: <%= @generic_pass_outgoing_start_range %> to: <%= @generic_pass_outgoing_end_range %>
         proxyprotocol: socks_v5
         command: bind connect udpassociate
         log: error connect disconnect iooperation
@@ -70,7 +70,7 @@ socks pass {
 
 # generic pass statement for incoming connections/packets
 socks pass {
-        from: 0.0.0.0/0 to: 0.0.0.0/0
+        from: <%= @generic_pass_incoming_start_range %>  to: <%= @generic_pass_incoming_end_range %>
         proxyprotocol: socks_v5
         command: bindreply udpreply
         log: error connect disconnect iooperation
