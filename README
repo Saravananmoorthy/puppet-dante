@@ -1,16 +1,15 @@
-dante
 
-This is the dante module.
+This is the puppet module for dante.
+Dante is a socks proxy. More info on [dante project page](http://www.inet.no/dante/)
 
 License
 -------
-
+Apache License, Version 2.0
 
 Contact
 -------
-
+sbose78@gmail.com
 
 Support
 -------
-
-Please log tickets and issues at our [Projects site](http://projects.example.com)
+Please log tickets and issues at our [Github Issues page](https://github.com/sbose78/puppet-dante/issues)
